@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>إشارة | مساعد التواصل</title>
+
+  <meta name="description" content="منصة إشارة لمساعدة الصم وضعاف السمع على التواصل بسهولة">
+  <meta name="theme-color" content="#6759e8">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6759e8;
+      --primary-dark: #5043c7;
+      --secondary: #43b7d9;
+      --success: #20b486;
+      --danger: #e95563;
+      --warning: #f2a93b;
+      --text: #20233c;
+      --muted: #777b98;
+      --background: #f5f7ff;
+      --card: rgba(255, 255, 255, 0.88);
+      --border: rgba(103, 89, 232, 0.12);
+      --shadow: 0 20px 60px rgba(56, 52, 120, 0.14);
+    }
+
+    body.dark {
+      --text: #f4f4ff;
+      --muted: #b8b9d3;
+      --background: #111326;
+      --card: rgba(29, 31, 58, 0.88);
+      --border: rgba(255, 255, 255, 0.11);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Cairo", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(103, 89, 232, 0.16), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(67, 183, 217, 0.14), transparent 28%),
+        var(--background);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    button,
+    textarea {
+      font-family: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .page {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    header {
+      padding: 22px 0;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 24px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 10px 25px rgba(103, 89, 232, 0.3);
+    }
+
+    .brand h1 {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .theme-button {
+      width: 45px;
+      height: 45px;
+      color: var(--text);
+      font-size: 20px;
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 30px;
+      margin: 22px 0 30px;
+      text-align: center;
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(103, 89, 232, 0.96), rgba(67, 183, 217, 0.91)),
+        var(--primary);
+      color: white;
+      box-shadow: 0 25px 55px rgba(88, 75, 200, 0.28);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      top: -130px;
+      left: -70px;
+    }
+
+    .hero::after {
+      width: 190px;
+      height: 190px;
+      bottom: -100px;
+      right: -50px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      margin-bottom: 12px;
+      font-size: clamp(27px, 5vw, 47px);
+      font-weight: 800;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 16px;
+      line-height: 1.9;
+      opacity: 0.94;
+    }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 8px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #8df5c9;
+      box-shadow: 0 0 0 5px rgba(141, 245, 201, 0.15);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .feature-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .card-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 21px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--primary), #8d7bff);
+    }
+
+    .camera-card .card-icon {
+      background: linear-gradient(135deg, var(--secondary), #66d8c1);
+    }
+
+    .card-title h3 {
+      font-size: 19px;
+    }
+
+    .card-title p {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .state-badge {
+      padding: 6px 11px;
+      color: var(--muted);
+      font-size: 11px;
+      border-radius: 30px;
+      background: rgba(119, 123, 152, 0.1);
+    }
+
+    .state-badge.active {
+      color: var(--success);
+      background: rgba(32, 180, 134, 0.12);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 165px;
+      resize: vertical;
+      padding: 18px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.9;
+      border: 1px solid var(--border);
+      outline: none;
+      border-radius: 18px;
+      background: rgba(245, 247, 255, 0.65);
+      transition: 0.25s;
+    }
+
+    body.dark textarea {
+      background: rgba(12, 14, 32, 0.48);
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(103, 89, 232, 0.12);
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 17px;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 13px;
+      background: var(--primary);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(119, 123, 152, 0.12);
+    }
+
+    .btn.success {
+      background: var(--success);
+    }
+
+    .btn.danger {
+      background: var(--danger);
+    }
+
+    .btn.warning {
+      background: var(--warning);
+    }
+
+    .btn.listening {
+      background: var(--danger);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(233, 85, 99, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(233, 85, 99, 0);
+      }
+    }
+
+    .quick-title {
+      margin-top: 22px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .quick-phrases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .phrase {
+      padding: 9px 12px;
+      color: var(--primary);
+      font-size: 12px;
+      border: 1px solid rgba(103, 89, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(103, 89, 232, 0.08);
+    }
+
+    .phrase:hover {
+      background: rgba(103, 89, 232, 0.16);
+    }
+
+    .camera-box {
+      position: relative;
+      overflow: hidden;
+      min-height: 315px;
+      display: grid;
+      place-items: center;
+      border-radius: 21px;
+      background: #101225;
+    }
+
+    #cameraPreview {
+      width: 100%;
+      height: 315px;
+      display: none;
+      object-fit: cover;
+      transform: scaleX(-1);
+    }
+
+    .camera-placeholder {
+      padding: 30px;
+      color: #b8bad4;
+      text-align: center;
+    }
+
+    .camera-placeholder .camera-emoji {
+      margin-bottom: 12px;
+      font-size: 55px;
+    }
+
+    .camera-placeholder p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .camera-overlay {
+      position: absolute;
+      inset: 14px;
+      display: none;
+      pointer-events: none;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+    }
+
+    .camera-overlay::before,
+    .camera-overlay::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: white;
+      border-style: solid;
+    }
+
+    .camera-overlay::before {
+      top: -2px;
+      right: -2px;
+      border-width: 3px 3px 0 0;
+    }
+
+    .camera-overlay::after {
+      bottom: -2px;
+      left: -2px;
+      border-width: 0 0 3px 3px;
+    }
+
+    .translation-result {
+      margin-top: 15px;
+      padding: 16px;
+      text-align: center;
+      border-radius: 17px;
+      background: rgba(32, 180, 134, 0.1);
+      border: 1px solid rgba(32, 180, 134, 0.18);
+    }
+
+    .translation-result small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    #signResult {
+      color: var(--success);
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .info-box {
+      padding: 17px;
+      text-align: center;
+      border-radius: 17px;
+      background: rgba(103, 89, 232, 0.07);
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 19px;
+    }
+
+    .info-box span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 15px 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      border-right: 4px solid var(--warning);
+      border-radius: 12px;
+      background: rgba(242, 169, 59, 0.1);
+    }
+
+    .emergency {
+      margin: 30px 0;
+      padding: 22px;
+      text-align: center;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #e95563, #ba354a);
+      color: white;
+      box-shadow: 0 18px 40px rgba(233, 85, 99, 0.24);
+    }
+
+    .emergency h3 {
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .emergency p {
+      margin-bottom: 15px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .emergency .btn {
+      color: var(--danger);
+      background: white;
+    }
+
+    footer {
+      padding: 25px 0 32px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 20;
+      right: 22px;
+      bottom: 22px;
+      max-width: min(360px, calc(100% - 44px));
+      padding: 13px 17px;
+      color: white;
+      font-size: 13px;
+      border-radius: 14px;
+      background: #242743;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 760px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card.full {
+        grid-column: auto;
+      }
+
+      .hero {
+        padding: 38px 20px;
+      }
+
+      .feature-card {
+        padding: 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons .btn {
+        flex: 1 1 calc(50% - 10px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <header>
+      <nav class="navbar">
+        <div class="brand">
+          <div class="brand-icon">🤟</div>
+          <div>
+            <h1>إشارة</h1>
+            <span>مساعد التواصل الذكي</span>
+          </div>
+        </div>
+
+        <button class="theme-button" id="themeButton" title="تغيير الوضع">
+          🌙
+        </button>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="hero">
+        <div class="hero-content">
+          <h2>تواصل أسهل، في أي وقت</h2>
+          <p>
+            منصة بسيطة تساعد الصم وضعاف السمع على تحويل الكلام إلى كتابة،
+            وتجربة التواصل باستخدام الكاميرا بطريقة واضحة وسهلة.
+          </p>
+
+          <div class="live-status">
+            <span class="status-dot"></span>
+            الموقع جاهز للاستخدام
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+
+        <article class="feature-card">
+          <div class="card-heading">
+            <div class="card-title">
+              <div class="card-icon">🎙️</div>
+              <div>
+                <h3>الكلام إلى كتابة</h3>
+                <p>تحدث وسيظهر كلامك على الشاشة</p>
+              </div>
+            </div>
+
+            <span class="state-badge" id="micState">متوقف</span>
+          </div>
+
+          <textarea
+            id="speechText"
+            placeholder="اضغط على ابدأ التحدث ثم تكلم بوضوح..."
+          ></textarea>
+
+          <div class="buttons">
+            <button class="btn" id="startSpeech">🎙️ ابدأ التحدث</button>
+            <button class="btn secondary" id="speakText">🔊 قراءة النص</button>
+            <button class="btn secondary" id="copyText">📋 نسخ</button>
+            <button class="btn danger" id="clearText">🗑️ مسح</button>
+          </div>
+
+          <div class="quick-title">عبارات سريعة</div>
+
+          <div class="quick-phrases">
+            <button class="phrase">أحتاج مساعدة</button>
+            <button class="phrase">من فضلك اكتب</button>
+            <button class="phrase">لا أفهم</button>
+            <button class="phrase">شكرًا لك</button>
+            <button class="phrase">اتصل بالإسعاف</button>
+          </div>
+        </article>
+
+        <article class="feature-card camera-card">
+          <div class="card-heading">
+            <div class="card-title">
+              <div class="card-icon">📷</div>
+              <div>
+                <h3>لغة الإشارة</h3>
+                <p>شغّل الكاميرا لبدء التجربة</p>
+              </div>
+            </div>
+
+            <span class="state-badge" id="cameraState">متوقفة</span>
+          </div>
+
+          <div class="camera-box">
+            <video id="cameraPreview" autoplay muted playsinline></video>
+
+            <div class="camera-placeholder" id="cameraPlaceholder">
+              <div class="camera-emoji">📹</div>
+              <p>
+                اضغط على تشغيل الكاميرا<br>
+                لوضع الشخص داخل الإطار
+              </p>
+            </div>
+
+            <div class="camera-overlay" id="cameraOverlay"></div>
+          </div>
+
+          <div class="translation-result">
+            <small>الترجمة الحالية</small>
+            <div id="signResult">لم يتم اكتشاف إشارة بعد</div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn success" id="startCamera">📷 تشغيل الكاميرا</button>
+            <button class="btn danger" id="stopCamera">⏹️ إيقاف الكاميرا</button>
+            <button class="btn secondary" id="readSign">🔊 نطق النتيجة</button>
+          </div>
+
+          <div class="notice">
+            النسخة الحالية تجهز الكاميرا وتعرض مساحة الترجمة. سيتم إضافة نموذج
+            التعرف الحقيقي على لغة الإشارة المصرية في المرحلة التالية.
+          </div>
+        </article>
+
+        <article class="feature-card full">
+          <div class="card-heading">
+            <div class="card-title">
+              <div class="card-icon">⚡</div>
+              <div>
+                <h3>مميزات سريعة</h3>
+                <p>أدوات تساعدك أثناء التواصل</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <strong>🔔</strong>
+              <span>تنبيهات واضحة</span>
+            </div>
+
+            <div class="info-box">
+              <strong>📳</strong>
+              <span>اهتزاز الهاتف</span>
+            </div>
+
+            <div class="info-box">
+              <strong>🌙</strong>
+              <span>وضع ليلي</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="emergency">
+        <h3>هل تحتاج إلى مساعدة عاجلة؟</h3>
+        <p>اضغط الزر لعرض رسالة الطوارئ بسرعة.</p>
+        <button class="btn" id="emergencyButton">🚨 أحتاج مساعدة</button>
+      </section>
+
+    </main>
+
+    <footer>
+      صُنع بحب لتسهيل التواصل 🤍
+    </footer>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const speechText = document.getElementById("speechText");
+    const startSpeech = document.getElementById("startSpeech");
+    const speakText = document.getElementById("speakText");
+    const copyText = document.getElementById("copyText");
+    const clearText = document.getElementById("clearText");
+    const micState = document.getElementById("micState");
+
+    const startCamera = document.getElementById("startCamera");
+    const stopCamera = document.getElementById("stopCamera");
+    const cameraPreview = document.getElementById("cameraPreview");
+    const cameraPlaceholder = document.getElementById("cameraPlaceholder");
+    const cameraOverlay = document.getElementById("cameraOverlay");
+    const cameraState = document.getElementById("cameraState");
+    const signResult = document.getElementById("signResult");
+    const readSign = document.getElementById("readSign");
+
+    const themeButton = document.getElementById("themeButton");
+    const emergencyButton = document.getElementById("emergencyButton");
+    const toast = document.getElementById("toast");
+
+    let recognition;
+    let cameraStream = null;
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    function vibrate(pattern = [80, 50, 80]) {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(pattern);
+      }
+    }
+
+    function speak(message) {
+      if (!message.trim()) {
+        showToast("اكتب نصًا أولًا.");
+        return;
+      }
+
+      if (!("speechSynthesis" in window)) {
+        showToast("المتصفح لا يدعم قراءة النص.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const voice = new SpeechSynthesisUtterance(message);
+      voice.lang = "ar-EG";
+      voice.rate = 0.9;
+      voice.pitch = 1;
+
+      window.speechSynthesis.speak(voice);
+    }
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+
+      recognition.lang = "ar-EG";
+      recognition.continuous = false;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        startSpeech.classList.add("listening");
+        startSpeech.innerHTML = "⏹️ استماع الآن...";
+        micState.textContent = "يستمع";
+        micState.classList.add("active");
+
+        showToast("اتكلمي الآن، أنا أستمع إليكِ.");
+        vibrate([70]);
+      };
+
+      recognition.onresult = (event) => {
+        let finalText = "";
+        let temporaryText = "";
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const result = event.results[i];
+
+          if (result.isFinal) {
+            finalText += result[0].transcript;
+          } else {
+            temporaryText += result[0].transcript;
+          }
+        }
+
+        if (finalText) {
+          speechText.value =
+            speechText.value.trim() +
+            (speechText.value.trim() ? " " : "") +
+            finalText.trim();
+
+          vibrate([60, 40, 60]);
+        } else if (temporaryText) {
+          micState.textContent = "يكتب...";
+        }
+      };
+
+      recognition.onerror = (event) => {
+        if (event.error === "not-allowed") {
+          showToast("يجب السماح للموقع باستخدام الميكروفون.");
+        } else if (event.error === "no-speech") {
+          showToast("لم أسمع كلامًا واضحًا.");
+        } else {
+          showToast("حدث خطأ أثناء تشغيل الميكروفون.");
+        }
+
+        resetMicButton();
+      };
+
+      recognition.onend = () => {
+        resetMicButton();
+      };
+
+      startSpeech.addEventListener("click", () => {
+        try {
+          recognition.start();
+        } catch (error) {
+          showToast("الميكروفون يعمل بالفعل.");
+        }
+      });
+    } else {
+      startSpeech.addEventListener("click", () => {
+        showToast("ميزة تحويل الكلام إلى نص غير مدعومة في هذا المتصفح.");
+      });
+    }
+
+    function resetMicButton() {
+      startSpeech.classList.remove("listening");
+      startSpeech.innerHTML = "🎙️ ابدأ التحدث";
+      micState.textContent = "متوقف";
+      micState.classList.remove("active");
+    }
+
+    speakText.addEventListener("click", () => {
+      speak(speechText.value);
+    });
+
+    copyText.addEventListener("click", async () => {
+      if (!speechText.value.trim()) {
+        showToast("لا يوجد نص لنسخه.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(speechText.value);
+        showToast("تم نسخ النص بنجاح.");
+        vibrate([70]);
+      } catch (error) {
+        speechText.select();
+        document.execCommand("copy");
+        showToast("تم نسخ النص.");
+      }
+    });
+
+    clearText.addEventListener("click", () => {
+      speechText.value = "";
+      showToast("تم مسح النص.");
+      vibrate([50]);
+    });
+
+    document.querySelectorAll(".phrase").forEach((phrase) => {
+      phrase.addEventListener("click", () => {
+        const phraseText = phrase.textContent.trim();
+
+        speechText.value =
+          speechText.value.trim() +
+          (speechText.value.trim() ? " " : "") +
+          phraseText;
+
+        showToast("تمت إضافة العبارة.");
+        vibrate([50]);
+      });
+    });
+
+    startCamera.addEventListener("click", async () => {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showToast("الكاميرا تحتاج إلى فتح الموقع من HTTPS.");
+        return;
+      }
+
+      try {
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "user"
+          },
+          audio: false
+        });
+
+        cameraPreview.srcObject = cameraStream;
+        cameraPreview.style.display = "block";
+        cameraPlaceholder.style.display = "none";
+        cameraOverlay.style.display = "block";
+
+        cameraState.textContent = "تعمل";
+        cameraState.classList.add("active");
+
+        signResult.textContent = "الكاميرا جاهزة للتعرف";
+        showToast("تم تشغيل الكاميرا.");
+        vibrate([80]);
+      } catch (error) {
+        showToast("لم يتم السماح باستخدام الكاميرا.");
+      }
+    });
+
+    stopCamera.addEventListener("click", () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+        cameraStream = null;
+      }
+
+      cameraPreview.srcObject = null;
+      cameraPreview.style.display = "none";
+      cameraPlaceholder.style.display = "block";
+      cameraOverlay.style.display = "none";
+
+      cameraState.textContent = "متوقفة";
+      cameraState.classList.remove("active");
+      signResult.textContent = "لم يتم اكتشاف إشارة بعد";
+
+      showToast("تم إيقاف الكاميرا.");
+    });
+
+    readSign.addEventListener("click", () => {
+      const result = signResult.textContent;
+
+      if (
+        result === "لم يتم اكتشاف إشارة بعد" ||
+        result === "الكاميرا جاهزة للتعرف"
+      ) {
+        showToast("لا توجد ترجمة لقراءتها الآن.");
+        return;
+      }
+
+      speak(result);
+    });
+
+    themeButton.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      const isDark = document.body.classList.contains("dark");
+      themeButton.textContent = isDark ? "☀️" : "🌙";
+
+      localStorage.setItem("eshara-theme", isDark ? "dark" : "light");
+      showToast(isDark ? "تم تشغيل الوضع الليلي." : "تم تشغيل الوضع النهاري.");
+    });
+
+    if (localStorage.getItem("eshara-theme") === "dark") {
+      document.body.classList.add("dark");
+      themeButton.textContent = "☀️";
+    }
+
+    emergencyButton.addEventListener("click", () => {
+      const emergencyMessage =
+        "أحتاج إلى مساعدة عاجلة، من فضلك اتصل بالطوارئ أو ساعدني.";
+
+      speechText.value = emergencyMessage;
+      showToast("تم تجهيز رسالة الطوارئ.");
+      speak(emergencyMessage);
+      vibrate([150, 80, 150, 80, 250]);
+    });
+
+    window.addEventListener("beforeunload", () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    });
+  </script>
+
+</body>
+</html>
